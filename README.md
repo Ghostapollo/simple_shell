@@ -2,7 +2,7 @@
 
 This project is based on a simple UNIX command interpreter that was built as a part of ALX software engineering project
 The project contains a main.c, main .h and all the prototypes and header files used in this project.
-'#, #, #, #, #, #, #, #, #, #, #, #, #, #, #, #'
+'#', '#, #, #, #, #, #, #, #, #, #, #, #, #, '#', '#'
 man or help:
 
 sh (Run sh as well)
