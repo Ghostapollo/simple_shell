@@ -14,6 +14,8 @@
 #include <sys/time.h>
 #include <sys/resource.h>
 
+int _putchar(char c);
+int main(int argc, char **argv);
 int access(const char *pathname, int mode);
 int chdir(const char *path);
 int close(int fd);
