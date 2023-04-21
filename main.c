@@ -1,9 +1,9 @@
-#include "main.h"
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
 #include <string.h>
 #include <sys/wait.h>
+#include <fcntl.h>
 
 #define MAX_INPUT 1024
 
@@ -40,11 +40,13 @@ int main(void)
 				exit(1);
 			}
 			else
+			{
 				int status;
-			if (waitpid(pid, &status, 0) == -1)
+				if (waitpid(pid, &status, 0) == -1)
 			{
 				perror("waitpid error");
 				exit(1);
+			}
 			}
 		}
 	}
