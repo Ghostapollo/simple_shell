@@ -1,11 +1,15 @@
 #include "main.h"
 #include <stdio.h>
-#include <unistd.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include <string.h>
+#include <signal.h>
 #include <sys/wait.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 
-#define MAX_INPUT 1024
+#define MAX_COMMAND_LENGTH 256
+#define MAX_ARGUMENTS 10
 
 /**
  * main - Entry point for the simple shell program
@@ -14,56 +18,62 @@
 */
 int main(void)
 {
-	char input[MAX_INPUT];
+	char *line = NULL;
+	size_t line_size = 0;
+	ssize_t nread;
+	int status;
+	while (1);
 
-	while (1)
+	write(STDOUT_FILENO, "$ ", 2);
+	nread = getline(&line, &line_size, stdin);
+	if (nread == -1)
 	{
-		printf("simple_shell$ ");
-		if (!fgets(input, MAX_INPUT, stdin))
+		if (feof(stdin))
 		{
-			printf("\n");
-			break;
+			exit(EXIT_SUCCESS);
 		}
-		input[strcspn(input, "\n")] = '\0';
-		pid_t pid = fork();
-
-		if (pid < 0)
+		else
 		{
-			perror("fork error");
-			exit(1);
-		}
-		else if (pid == 0)
-		{
-			if (execlp(input, input, (char *)NULL) == -1)
-			{
-				perror("exec error");
-				exit(1);
-			}
-			else
-				int status;
-			if (waitpid(pid, &status, 0) == -1)
-			{
-				perror("waitpid error");
-				exit(1);
-			}
+			perror("getline");
+			exit(EXIT_FAILURE);
 		}
 	}
-	return (0);
+	line[strcspn(line, "\n")] = '\0';
+	char *args[MAX_ARGUMENTS + 1];
+	char *arg = strtok(line, " ");
+	int i = 0;
+
+	while (arg != NULL && i < MAX_ARGUMENTS)
+	{
+		args[i++] = arg;
+		arg = strtok(NULL, " ");
+	}
+	args[i] = NULL;
+	pid_t pid = fork();
+
+	if (pid == -1)
+	{
+		perror("fork");
+		exit(EXIT_FAILURE);
+	}
+	else if (pid == 0)
+	{
+		if (access(args[0], X_OK) == -1)
+		{
+			write(STDOUT_FILENO, "Command not found: ", 19);
+			write(STDOUT_FILENO, args[0], strlen(args[0]));
+			write(STDOUT_FILENO, "\n", 1);
+			exit(EXIT_FAILURE);
+		}
+		execve(args[0], args, NULL);
+		perror(args[0]);
+		exit(EXIT_FAILURE);
+	}
+	else
+	{
+		waitpid(pid, &status, 0);
+	}
 }
 
-void prompt(void);
-void execute_command(char *command);
-
-int main(void)
-{
-	while (1)
-	{
-		prompt();
-		char input[100];
-
-		fgets(input, sizeof(input), stdin);
-		input[strlen(input) - 1] = '\0';
-		execute_command(input);
-	}
-	return (0);
+return (0);
 }
