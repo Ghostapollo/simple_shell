@@ -23,7 +23,6 @@ typedef struct process_builtin builtin_t;
 extern char **environ;
 
 int _putchar(char c);
-int main(int argc, char **argv);
 int access(const char *pathname, int mode);
 int chdir(const char *path);
 int close(int fd);
@@ -40,7 +39,6 @@ ssize_t getline(char **lineptr, size_t *n, FILE *stream);
 pid_t getpid(void);
 int isatty(int fd);
 int kill(pid_t pid, int sig);
-int open(const char *pathname, int flags);
 DIR *opendir(const char *name);
 void perror(const char *s);
 ssize_t read(int fd, void *buf, size_t count);
@@ -56,5 +54,7 @@ pid_t waitpid(pid_t pid, int *wstatus, int options);
 pid_t wait3(int *wstatus, int options, struct rusage *rusage);
 pid_t wait4(pid_t pid, int *wstatus, int options, struct rusage *rusage);
 ssize_t write(int fd, const void *buf, size_t count);
+void prompt(void);
+void execute_command(char *command);
 
 #endif
