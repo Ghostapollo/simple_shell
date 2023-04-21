@@ -1,18 +1,26 @@
 #ifndef MAIN_H
 #define MAIN_H
 
+#include <stddef.h>
 #include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <sys/types.h>
-#include <dirent.h>
-#include <signal.h>
-#include <sys/stat.h>
-#include <string.h>
-#include <sys/wait.h>
-#include <sys/time.h>
-#include <sys/resource.h>
+
+/**
+ * struct process_builtin - structure to hold a command and a
+ * function pointer to hold the command
+ *
+ * @cmd: the command to execute
+ * @execute_builtin: pointer to a function that takes a command and
+ * executes it
+ *
+ */
+struct process_builtin
+{
+	char *cmd;
+	void (*execute_builtin)(char **tokens);
+};
+typedef struct process_builtin builtin_t;
+
+extern char **environ;
 
 int _putchar(char c);
 int access(const char *pathname, int mode);
