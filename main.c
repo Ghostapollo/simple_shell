@@ -4,10 +4,7 @@
 #include <string.h>
 #include <signal.h>
 #include <sys/wait.h>
-<<<<<<< HEAD
-=======
 #include <sys/stat.h>
->>>>>>> c6e6481a26cded4904a04f9d96f70903e214f06c
 #include <fcntl.h>
 
 #define MAX_COMMAND_LENGTH 256
@@ -36,7 +33,7 @@ int main(void)
 		}
 		else
 		{
-<<<<<<< HEAD
+
 			if (execlp(input, input, (char *)NULL) == -1)
 			{
 				perror("exec error");
@@ -51,10 +48,9 @@ int main(void)
 				exit(1);
 			}
 			}
-=======
+
 			perror("getline");
 			exit(EXIT_FAILURE);
->>>>>>> c6e6481a26cded4904a04f9d96f70903e214f06c
 		}
 	}
 	line[strcspn(line, "\n")] = '\0';
