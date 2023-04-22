@@ -3,6 +3,13 @@
 
 #include <stddef.h>
 #include <stdio.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/time.h>
+#include <sys/resource.h>
+#include <sys/wait.h>
+#include <dirent.h>
+#include <sys/stat.h>
 
 /**
  * struct process_builtin - structure to hold a command and a
