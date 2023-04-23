@@ -1,7 +1,9 @@
-#include "main.h"
 #include <unistd.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 
 /**
  * check_command - checks if a command exists
