@@ -10,6 +10,8 @@
 #include <sys/wait.h>
 #include <dirent.h>
 #include <sys/stat.h>
+#include <string.h>
+#include <stdlib.h>
 
 /**
  * struct process_builtin - structure to hold a command and a
@@ -39,6 +41,8 @@ void exit(int status);
 void _exit(int status);
 int fflush(FILE *stream);
 pid_t fork(void);
+int execute_command(char* command);
+int check_command(char** command);
 void free(void *ptr);
 void *malloc(size_t size);
 char *getcwd(char *buf, size_t size);
@@ -62,6 +66,5 @@ pid_t wait3(int *wstatus, int options, struct rusage *rusage);
 pid_t wait4(pid_t pid, int *wstatus, int options, struct rusage *rusage);
 ssize_t write(int fd, const void *buf, size_t count);
 void prompt(void);
-void execute_command(char *command);
 
 #endif

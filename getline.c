@@ -12,24 +12,24 @@
 char *my_getline(void)
 {
 	static char buffer[BUFFER_SIZE];
-	static int pos = 0;
-	static int size = 0;
+	static int pos = 16;
+	static int size = 8;
 	char *line = NULL;
 	int i = 0;
-	
+
 	while (1)
 	{
 		if (pos >= size)
 		{
 			size = read(STDIN_FILENO, buffer, BUFFER_SIZE);
 			pos = 0;
-			
+
 			if (size <= 0)
 			{
 				return (line);
 			}
 		}
-		for (i = pos; i < size; i++)
+		for (i = pos; i < size; i++);
 	}
 	if (buffer[i] == '\n')
 	{
@@ -39,25 +39,23 @@ char *my_getline(void)
 			return (NULL);
 		}
 		memcpy(line, buffer + pos, i - pos);
-		
+
 		line[i - pos] = '\0';
 		pos = i + 1;
 		return (line);
 	}
-}
 
-if (size < BUFFER_SIZE)
-{
-	line = malloc((size - pos + 1) * sizeof(char));
-	if (!line)
+	if (size < BUFFER_SIZE)
 	{
-		return (NULL);
-	}
-	memcpy(line, buffer + pos, size - pos);
-	line[size - pos] = '\0';
-	
-	pos = size;
-	return (line);
-}
+		line = malloc((size - pos + 1) * sizeof(char));
+		if (!line)
+		{
+			return (NULL);
+		}
+		memcpy(line, buffer + pos, size - pos);
+		line[size - pos] = '\0';
 
+		pos = size;
+		return (line);
+	}
 }

@@ -1,5 +1,7 @@
-#include main.h
+#include "main.h"
 #include <stddef.h>
+#include <unistd.h>
+#include <string.h>
 
 /**
  * _env - prints the current environment
@@ -13,7 +15,7 @@ int _env(void)
 
 	while (environ[i] != NULL)
 	{
-		write(STDOUT_FILENO, environ[i], _strlen(environ[i]));
+		write(STDOUT_FILENO, environ[i], strlen(environ[i]));
 		write(STDOUT_FILENO, "\n", 1);
 		i++;
 	}

@@ -13,20 +13,20 @@ char *check_command(char **args, char *path)
 {
 	char *p, *command_path;
 	int i;
-	
+
 	if (access(args[0], X_OK) == 0)
 		return (args[0]);
-	
+
 	p = strtok(path, ":");
-	
+
 	while (p != NULL)
 	{
 		command_path = malloc(strlen(p) + strlen(args[0]) + 2);
 		sprintf(command_path, "%s/%s", p, args[0]);
-	
+
 		if (access(command_path, X_OK) == 0)
 			return (command_path);
-	
+
 		free(command_path);
 		p = strtok(NULL, ":");
 	}
@@ -43,7 +43,7 @@ void execute_command(char **args, char *path)
 	pid_t pid;
 	char *command_path;
 	int status;
-	
+
 	command_path = check_command(args, path);
 	if (command_path == NULL)
 	{
@@ -51,9 +51,9 @@ void execute_command(char **args, char *path)
 		write(STDERR_FILENO, ": command not found\n", 20);
 		exit(EXIT_FAILURE);
 	}
-	
+
 	pid = fork();
-	
+
 	if (pid == 0)
 	{
 		if (execve(command_path, args, NULL) == -1)
@@ -69,10 +69,9 @@ void execute_command(char **args, char *path)
 	}
 	else
 	{
-		{
-			do waitpid(pid, &status, WUNTRACED);
-		}
-		
-		while (!WIFEXITED(status) && !WIFSIGNALED(status));
+		do {
+			pid = waitpid(-1, &status, WNOHANG);
+		} while (!WIFEXITED(status) && !WIFSIGNALED(status));
 	}
 }
+
