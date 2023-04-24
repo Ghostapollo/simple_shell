@@ -92,7 +92,8 @@ int main(void)
 	char *line = NULL;
 	char *args[BUFFER_SIZE];
 	int num_args = 0;
-
+	char *path = "/bin:/usr/bin";
+	
 	while (1)
 	{
 		write(STDOUT_FILENO, "$ ", 2);
