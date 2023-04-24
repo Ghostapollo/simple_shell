@@ -58,6 +58,14 @@ int _parse_line(char *line, char **args)
  */
 int _execute(char **args)
 {
+	if (strcmp(args[0], "cd") == 0)
+	{
+		if (chdir(args[1]) != 0)
+		{
+			perror("chdir");
+		}
+		return (1);
+	}
 	pid_t pid;
 
 	pid = fork();
