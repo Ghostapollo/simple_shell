@@ -58,16 +58,8 @@ int _parse_line(char *line, char **args)
  */
 int _execute(char **args)
 {
-	if (strcmp(args[0], "cd") == 0)
-	{
-		if (chdir(args[1]) != 0)
-		{
-			perror("chdir");
-		}
-		return (1);
-	}
 	pid_t pid;
-
+	
 	pid = fork();
 	if (pid == -1)
 	{
@@ -78,15 +70,25 @@ int _execute(char **args)
 	{
 		if (execvp(args[0], args) == -1)
 		{
-			perror("execvp");
-			exit(EXIT_FAILURE);
+			if (strcmp(args[0], "cd") == 0)
+			{
+				if (chdir(args[1]) != 0)
+				{
+					perror(args[1]);
+				}
+				exit(EXIT_SUCCESS);
+			}
+			else
+			{
+				perror("execvp");
+				exit(EXIT_FAILURE);
+			}
 		}
 	}
 	else
 	{
 		wait(NULL);
 	}
-
 	return (1);
 }
 
@@ -110,9 +112,15 @@ int main(void)
 			break;
 		num_args = _parse_line(line, args);
 		if (num_args > 0)
+		{
+			if (strcmp(args[0], "exit") == 0)
+			{
+				free(line);
+				exit(EXIT_SUCCESS);
+			}
 			_execute(args);
+		}
 		free(line);
 	}
-
 	return (0);
 }
