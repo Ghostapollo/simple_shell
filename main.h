@@ -67,4 +67,6 @@ pid_t wait4(pid_t pid, int *wstatus, int options, struct rusage *rusage);
 ssize_t write(int fd, const void *buf, size_t count);
 void prompt(void);
 
+void change_directory(char **tokens);
+
 #endif

@@ -2,12 +2,13 @@
 #include "main.h"
 
 /**
- * _exit - Terminates the calling process immediately.
- * exit - Exits the shell
- *
- * Return: None.
+ * exit_shell - exits the simple shell program
+ * @argv: argument vector
+ * Return: Always returns 0
  */
-void _exit(int status)
+int exit_shell(char **argv)
 {
-	exit(0);
+	(void)argv;
+	exit(EXIT_SUCCESS);
+	return (0);
 }
