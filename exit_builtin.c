@@ -9,7 +9,7 @@
 #define MAX_ARGS 10
 
 /**
- * exit_shell - exits the shell
+ * _exit - exits the shell
  */
 void exit_shell(void)
 {
