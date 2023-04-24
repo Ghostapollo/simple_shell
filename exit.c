@@ -1,15 +1,23 @@
 #include <stdlib.h>
 #include <unistd.h>
+#include <string.h>
 #include "main.h"
 
 /**
- * exit_shell - exits the simple shell program
- * @argv: argument vector
- * Return: Always returns 0
+ * exit_shell - Exits the shell program.
+ * @argv: The argument vector.
+ *
+ * Return: Always 0.
  */
 int exit_shell(char **argv)
 {
-	(void)argv;
-	exit(EXIT_SUCCESS);
+	char *exit_msg = "Exiting shell program...\n";
+	
+	if (strcmp(argv[0], "exit") == 0)
+	{
+		write(STDOUT_FILENO, exit_msg, strlen(exit_msg));
+		exit(EXIT_SUCCESS);
+	}
 	return (0);
 }
+
