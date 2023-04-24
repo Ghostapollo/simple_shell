@@ -24,7 +24,9 @@ void exit_shell(void)
  */
 int parse_input(char *input, char **args)
 {
-       	return (0);
+	return (0);
+}
+
 /**
  * main - the entry point of the program
  * Return: Always 0
@@ -35,14 +37,14 @@ int main(void)
 	char *args[MAX_ARGS];
 	int num_args;
 	int status;
-	
+
 	do {
 		prompt();
-		
-		readlinkat(AT_FDCWD, "simple_shell", input, PATH_MAX);
-		
+
+		readlinkat(AT_FDCWD, "0x2_simple-shell", input, PATH_MAX);
+
 		num_args = parse_input(input, args);
-		
+
 		if (num_args > 0)
 		{
 			if (strcmp(args[0], "exit") == 0)
@@ -54,15 +56,15 @@ int main(void)
 				int num_environ_vars = 0;
 				char **environ_copy = NULL;
 				int i;
-				
+
 				for (i = 0; environ[i] != NULL; i++)
 					num_environ_vars++;
 				environ_copy = malloc(sizeof(char *) * (num_environ_vars + 1));
-				
+
 				for (i = 0; environ[i] != NULL; i++)
 					environ_copy[i] = strdup(environ[i]);
 				environ_copy[i] = NULL;
-				
+
 				for (i = 0; environ_copy[i] != NULL; i++)
 					write(STDOUT_FILENO, environ_copy[i], strlen(environ_copy[i]));
 				free(environ_copy);
@@ -79,10 +81,12 @@ int main(void)
 				}
 			}
 		}
-		while (1); {
-			free(input);
-		}
-		
-		return (0);
+
 	}
+	while (1);
+	{
+		free(input);
+	}
+
+	return (0);
 }
