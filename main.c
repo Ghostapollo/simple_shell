@@ -21,9 +21,9 @@ int main(void)
 	size_t line_size = 0;
 	ssize_t nread;
 	int status;
-	while (1);
 
-	write(STDOUT_FILENO, "$ ", 2);
+	while (1)
+		write(STDOUT_FILENO, "$ ", 2);
 	nread = getline(&line, &line_size, stdin);
 	if (nread == -1)
 	{
@@ -33,7 +33,6 @@ int main(void)
 		}
 		else
 		{
-
 			if (execlp(input, input, (char *)NULL) == -1)
 			{
 				perror("exec error");
@@ -42,11 +41,12 @@ int main(void)
 			else
 			{
 				int status;
+
 				if (waitpid(pid, &status, 0) == -1)
-			{
-				perror("waitpid error");
-				exit(1);
-			}
+				{
+					perror("waitpid error");
+					exit(1);
+				}
 			}
 
 			perror("getline");

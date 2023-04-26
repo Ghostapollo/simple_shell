@@ -12,7 +12,7 @@
 int exit_shell(char **argv)
 {
 	char *exit_msg = "Exiting shell program...\n";
-	
+
 	if (strcmp(argv[0], "exit") == 0)
 	{
 		write(STDOUT_FILENO, exit_msg, strlen(exit_msg));
