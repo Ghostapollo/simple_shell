@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
-#include "main.h"
+#include "shell.h"
 
 /**
  * exit_shell - Exits the shell program.

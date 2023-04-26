@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include "shell.h"
 
 /**
  * check_command - checks if a command exists

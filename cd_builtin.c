@@ -3,7 +3,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <errno.h>
-#include "main.h"
+#include "shell.h"
 
 #define MAX_PATH_LEN 1024
 

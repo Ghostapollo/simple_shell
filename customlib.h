@@ -1,4 +1,5 @@
 #include <stddef.h>
+#include "shell.h"
 
 int _strcmp(const char *s1, const char *s2);
 
