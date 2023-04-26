@@ -21,9 +21,15 @@ int main(void)
 	size_t line_size = 0;
 	ssize_t nread;
 	int status;
+<<<<<<< HEAD
 
 	while (1)
 		write(STDOUT_FILENO, "$ ", 2);
+=======
+	while (1);
+	
+	write(STDOUT_FILENO, "$ ", 2);
+>>>>>>> 8ff6556f471bdc38eaf3628b1ba75b1d8bc78b27
 	nread = getline(&line, &line_size, stdin);
 	if (nread == -1)
 	{
@@ -48,7 +54,10 @@ int main(void)
 					exit(1);
 				}
 			}
+<<<<<<< HEAD
 
+=======
+>>>>>>> 8ff6556f471bdc38eaf3628b1ba75b1d8bc78b27
 			perror("getline");
 			exit(EXIT_FAILURE);
 		}
@@ -57,7 +66,7 @@ int main(void)
 	char *args[MAX_ARGUMENTS + 1];
 	char *arg = strtok(line, " ");
 	int i = 0;
-
+	
 	while (arg != NULL && i < MAX_ARGUMENTS)
 	{
 		args[i++] = arg;
@@ -65,7 +74,7 @@ int main(void)
 	}
 	args[i] = NULL;
 	pid_t pid = fork();
-
+	
 	if (pid == -1)
 	{
 		perror("fork");
