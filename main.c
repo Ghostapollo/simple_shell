@@ -22,7 +22,7 @@ int main(void)
 	ssize_t nread;
 	int status;
 	while (1);
-
+	
 	write(STDOUT_FILENO, "$ ", 2);
 	nread = getline(&line, &line_size, stdin);
 	if (nread == -1)
@@ -33,7 +33,6 @@ int main(void)
 		}
 		else
 		{
-
 			if (execlp(input, input, (char *)NULL) == -1)
 			{
 				perror("exec error");
@@ -43,12 +42,11 @@ int main(void)
 			{
 				int status;
 				if (waitpid(pid, &status, 0) == -1)
-			{
-				perror("waitpid error");
-				exit(1);
+				{
+					perror("waitpid error");
+					exit(1);
+				}
 			}
-			}
-
 			perror("getline");
 			exit(EXIT_FAILURE);
 		}
@@ -57,7 +55,7 @@ int main(void)
 	char *args[MAX_ARGUMENTS + 1];
 	char *arg = strtok(line, " ");
 	int i = 0;
-
+	
 	while (arg != NULL && i < MAX_ARGUMENTS)
 	{
 		args[i++] = arg;
@@ -65,7 +63,7 @@ int main(void)
 	}
 	args[i] = NULL;
 	pid_t pid = fork();
-
+	
 	if (pid == -1)
 	{
 		perror("fork");
