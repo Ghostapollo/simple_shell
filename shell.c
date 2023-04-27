@@ -6,19 +6,27 @@
 #include <sys/wait.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+#include "execute.h"
 
 #define MAX_COMMAND_LENGTH 256
 #define MAX_ARGUMENTS 10
 
 /**
  * main - Entry point for the simple shell program
+ *@args: array of strings
+ *@argv: argument vector
  *
  * Return: Always 0 on successful completion
 */
 int main(void)
 {
+        int i = 0;
+        pid_t pid = fork();
+	char *input;
+	char *args[MAX_ARGUMENTS + 1];
 	char *line = NULL;
 	size_t line_size = 0;
+	char *arg = strtok(line, " ");
 	ssize_t nread;
 	int status;
 
@@ -56,9 +64,6 @@ int main(void)
 		}
 	}
 	line[strcspn(line, "\n")] = '\0';
-	char *args[MAX_ARGUMENTS + 1];
-	char *arg = strtok(line, " ");
-	int i = 0;
 	
 	while (arg != NULL && i < MAX_ARGUMENTS)
 	{
@@ -66,7 +71,6 @@ int main(void)
 		arg = strtok(NULL, " ");
 	}
 	args[i] = NULL;
-	pid_t pid = fork();
 	
 	if (pid == -1)
 	{
@@ -90,7 +94,6 @@ int main(void)
 	{
 		waitpid(pid, &status, 0);
 	}
-}
 
-return (0);
+	return (0);
 }

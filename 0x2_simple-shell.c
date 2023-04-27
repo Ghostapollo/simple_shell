@@ -16,9 +16,9 @@
 char *_get_line(void)
 {
 	char *line = NULL;
-	ssize_t buffer_size = 0;
+	size_t buffer_size = 0;
 
-	if (getline(&line, &buffer_size, stdin) == -1)
+	if (getline(&line, (size_t*)&buffer_size, stdin) == -1)
 	{
 		free(line);
 		return (NULL);
@@ -102,7 +102,6 @@ int main(void)
 	char *line = NULL;
 	char *args[BUFFER_SIZE];
 	int num_args = 0;
-	char *path = "/bin:/usr/bin";
 	
 	while (1)
 	{

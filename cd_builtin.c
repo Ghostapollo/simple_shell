@@ -16,6 +16,7 @@
 int cd_builtin(char *path)
 {
 	char old_path[MAX_PATH_LEN];
+	char new_path[MAX_PATH_LEN];
 
 	if (getcwd(old_path, MAX_PATH_LEN) == NULL)
 	{
@@ -38,8 +39,6 @@ int cd_builtin(char *path)
 		perror("chdir");
 		return (-1);
 	}
-
-	char new_path[MAX_PATH_LEN];
 
 	if (getcwd(new_path, MAX_PATH_LEN) == NULL)
 	{

@@ -15,7 +15,6 @@
 char *check_command(char **args, char *path)
 {
 	char *p, *command_path;
-	int i;
 
 	if (access(args[0], X_OK) == 0)
 		return (args[0]);

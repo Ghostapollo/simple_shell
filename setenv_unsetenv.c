@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <errno.h>
-#include <customlib.h>
+#include "customlib.h"
 
 /**
  * _execute - executes a command with the given arguments
@@ -12,7 +12,7 @@
  *
  * Return: 1 if the command was executed successfully, 0 otherwise
  */
-int _execute(char **args, char **envp)
+int _execute(char **args)
 {
 	if (_strcmp(args[0], "exit") == 0)
 	{
@@ -58,6 +58,6 @@ int _execute(char **args, char **envp)
 			write(STDERR_FILENO, "unsetenv: Failed to unset environment variable\n", 49);
 			return (0);
 		}
-		return (1);
 	}
+	return (1);
 }
