@@ -91,35 +91,3 @@ int _execute(char **args)
 	}
 	return (1);
 }
-
-/**
- * main - entry point for the program
- *
- * Return: always 0
- */
-int main(void)
-{
-	char *line = NULL;
-	char *args[BUFFER_SIZE];
-	int num_args = 0;
-	
-	while (1)
-	{
-		write(STDOUT_FILENO, "$ ", 2);
-		line = _get_line();
-		if (line == NULL)
-			break;
-		num_args = _parse_line(line, args);
-		if (num_args > 0)
-		{
-			if (strcmp(args[0], "exit") == 0)
-			{
-				free(line);
-				exit(EXIT_SUCCESS);
-			}
-			_execute(args);
-		}
-		free(line);
-	}
-	return (0);
-}
