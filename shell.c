@@ -6,7 +6,6 @@
 #include <sys/wait.h>
 #include <sys/stat.h>
 #include <fcntl.h>
-#include "execute.h"
 
 #define MAX_COMMAND_LENGTH 256
 #define MAX_ARGUMENTS 10
